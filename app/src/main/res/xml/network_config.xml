@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+<!--    允许以明文的方式在网络上传输数据，而HTTP使用的就是明文传输方式-->
+    <base-config cleartextTrafficPermitted = "true">
+        <trust-anchors>
+            <certificates src = "system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
