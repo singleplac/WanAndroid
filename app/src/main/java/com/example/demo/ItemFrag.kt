@@ -75,8 +75,6 @@ class ItemFrag : Fragment() {
 
                     val item = Item(it.title, it.shareUser, it.link, responseData.data.curPage)
                     itemList.add(item)
-//                    adapter = ItemAdapter(itemList)
-//                    itemRecyclerview?.adapter = adapter
                     adapter.notifyDataSetChanged()
                     progressBar?.visibility = View.GONE
 
@@ -157,8 +155,6 @@ class ItemFrag : Fragment() {
                     val itemSize = items.size
                     Log.d("MainActivity", "items.size = $itemSize")
                     adapter.addItem(items)
-//                    adapter = ItemAdapter(itemList)
-//                    itemRecyclerview?.adapter = adapter
                     adapter.notifyDataSetChanged()
                     Log.d("MainActivity", "page $pageNumber is loaded...")
                     Toast.makeText(activity, "page $pageNumber is loaded...", Toast.LENGTH_SHORT)
