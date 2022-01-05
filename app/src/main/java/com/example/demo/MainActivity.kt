@@ -17,26 +17,7 @@ class MainActivity : AppCompatActivity(), Communicator {
         setContentView(R.layout.activity_main)
         val itemFrag = ItemFrag()
         supportFragmentManager.beginTransaction().replace(R.id.AppLayout, itemFrag).commit()
-
-
-
-// 设置下拉进度
-        val swipeRefreshView: SwipeRefreshLayout = findViewById(R.id.refresh)
-        //下拉刷新颜色
-        swipeRefreshView.setColorSchemeColors(Color.rgb(122, 223, 189))
-
-        swipeRefreshView.setOnRefreshListener {
-            thread {
-                Thread.sleep(2000)
-                runOnUiThread {
-                    Toast.makeText(this, "Refresh successfully", Toast.LENGTH_SHORT).show()
-                    swipeRefreshView.isRefreshing = false
-                }
-
-            }
-
-        }
-
+        
 
     }
 

@@ -17,12 +17,10 @@ class ItemFrag : Fragment() {
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var adapter: ItemFrag.ItemAdapter
     private lateinit var appService: AppService
+    private lateinit var itemRecyclerview: RecyclerView
 
-    var itemRecyclerview: RecyclerView? = null
     var progressBar: ProgressBar? = null
-
-    var itemList = ArrayList<Item>()
-
+    var itemList = ArrayList<DataX>()
     var isLoading = true
     var pageNumber = 0
 
@@ -60,37 +58,14 @@ class ItemFrag : Fragment() {
 
         //设置layoutManger
         layoutManager = LinearLayoutManager(activity)
-        itemRecyclerview?.layoutManager = layoutManager
+        itemRecyclerview.layoutManager = layoutManager
         adapter = ItemAdapter(itemList)
-        itemRecyclerview?.adapter = adapter
-
-        appService.getAppData(pageNumber).enqueue(object : retrofit2.Callback<DataModel> {
-
-            override fun onResponse(
-                call: retrofit2.Call<DataModel>,
-                response: retrofit2.Response<DataModel>
-            ) {
-                val responseData = response.body()
-                responseData?.data?.datas?.forEach {
-
-                    val item = Item(it.title, it.shareUser, it.link, responseData.data.curPage)
-                    itemList.add(item)
-                    adapter.notifyDataSetChanged()
-                    progressBar?.visibility = View.GONE
-
-                }
-            }
-
-            override fun onFailure(call: retrofit2.Call<DataModel>, t: Throwable) {
-                t.printStackTrace()
-            }
-
-        })
-
+        itemRecyclerview.adapter = adapter
+        retrofitService(false)
 
         //滑动窗口监控
 
-        itemRecyclerview?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        itemRecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
@@ -101,29 +76,42 @@ class ItemFrag : Fragment() {
                     total = layoutManager.itemCount
                     //划过的个数
                     pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
+
                     Log.d(
                         "MainActivity", "total = $total, visibleItemCount  = $visibleItemCount, " +
                                 "pastVisibleItem = $pastVisibleItem"
                     )
+
+
                     if (isLoading) {
+
                         Log.d("MainActivity", "is Loading...... please wait patiently")
+
                         if (total > previousTotal) {
                             isLoading = false
                             previousTotal = total
 
                             Log.d("MainActivity", "previousTotal = $previousTotal , total = $total")
                         }
+
                     }
+
                     Log.d(
                         "MainActivity", "total = $total, visibleItemCount  = $visibleItemCount," +
                                 " pastVisibleItem = $pastVisibleItem,previous_total = $previousTotal "
                     )
+
                     if (!isLoading && ((total - visibleItemCount) <= (pastVisibleItem + viewThreshold))) {
+
                         pageNumber++
+
                         Log.d("MainActivity", "Loading page is $pageNumber")
+
                         performPagination()
+
                         isLoading = true
                     }
+
                 }
             }
         })
@@ -131,12 +119,10 @@ class ItemFrag : Fragment() {
 
     }
 
-    private fun performPagination() {
+    private fun retrofitService(pagination: Boolean) {
 
-        progressBar?.visibility = View.VISIBLE
-        val items = ArrayList<Item>()
-        Log.d("MainActivity", "Hello? I'm in perform pagination")
         appService.getAppData(pageNumber).enqueue(object : retrofit2.Callback<DataModel> {
+
             override fun onResponse(
                 call: retrofit2.Call<DataModel>,
                 response: retrofit2.Response<DataModel>
@@ -147,22 +133,39 @@ class ItemFrag : Fragment() {
 
                     responseData.data.datas.forEach {
 
-                        val item = Item(it.title, it.shareUser, it.link, responseData.data.curPage)
+                        val item = DataX(
+                            it.apkLink, it.audit, it.author, it.canEdit,
+                            it.chapterId, it.chapterName, it.collect, it.courseId,
+                            it.desc, it.descMd, it.envelopePic, it.fresh,
+                            it.host, it.id, it.link, it.niceDate,
+                            it.niceShareDate, it.origin, it.prefix, it.projectLink,
+                            it.publishTime, it.realSuperChapterId, it.selfVisible, it.shareDate,
+                            it.shareUser, it.superChapterId, it.superChapterName, it.tags,
+                            it.title, it.type, it.userId, it.visible,
+                            it.zan
+                        )
 
-                        items.add(item)
+                        itemList.add(item)
 
                     }
-                    val itemSize = items.size
-                    Log.d("MainActivity", "items.size = $itemSize")
-                    adapter.addItem(items)
                     adapter.notifyDataSetChanged()
-                    Log.d("MainActivity", "page $pageNumber is loaded...")
-                    Toast.makeText(activity, "page $pageNumber is loaded...", Toast.LENGTH_SHORT)
-                        .show()
 
+                    if (pagination) {
+                        Log.d("MainActivity", "page $pageNumber is loaded...")
+                        Toast.makeText(
+                            activity,
+                            "page $pageNumber is loaded...",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    } else {
+                        progressBar?.visibility = View.GONE
+                    }
 
                 } else {
-                    Log.d("MainActivity", "No more items available")
+
+                    Log.d("MainActivity", "Error loading")
+
                 }
 
             }
@@ -173,13 +176,22 @@ class ItemFrag : Fragment() {
 
 
         })
+
+    }
+
+    private fun performPagination() {
+
+
+        progressBar?.visibility = View.VISIBLE
+
+        retrofitService(true)
+
         progressBar?.visibility = View.GONE
     }
 
     //创建自己的Adapter
     //传入list
-
-    inner class ItemAdapter(private val newsList: List<Item>) :
+    inner class ItemAdapter(private val newsList: List<DataX>) :
         RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
 
@@ -189,7 +201,6 @@ class ItemFrag : Fragment() {
 
             var title: TextView = view.findViewById(R.id.title)
             var shareUser: TextView = view.findViewById(R.id.shareUser)
-            var curPage: TextView = view.findViewById(R.id.curPage)
 
         }
 
@@ -229,23 +240,15 @@ class ItemFrag : Fragment() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-            //设置参数
 
             val item = newsList[position]
-
+            //设置参数
             holder.title.text = item.title
             holder.shareUser.text = item.shareUser
-            holder.curPage.text = "${item.curPage}"
+
         }
 
         override fun getItemCount() = newsList.size
-
-        fun addItem(items: List<Item>) {
-            for (i in items) {
-                itemList.add(i)
-            }
-
-        }
 
     }
 
