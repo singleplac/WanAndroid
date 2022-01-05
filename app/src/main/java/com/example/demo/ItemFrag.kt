@@ -131,23 +131,8 @@ class ItemFrag : Fragment() {
                 val responseData = response.body()
                 if (responseData!!.errorCode == 0) {
 
-                    responseData.data.datas.forEach {
+                    itemList.addAll(responseData.data.datas)
 
-                        val item = DataX(
-                            it.apkLink, it.audit, it.author, it.canEdit,
-                            it.chapterId, it.chapterName, it.collect, it.courseId,
-                            it.desc, it.descMd, it.envelopePic, it.fresh,
-                            it.host, it.id, it.link, it.niceDate,
-                            it.niceShareDate, it.origin, it.prefix, it.projectLink,
-                            it.publishTime, it.realSuperChapterId, it.selfVisible, it.shareDate,
-                            it.shareUser, it.superChapterId, it.superChapterName, it.tags,
-                            it.title, it.type, it.userId, it.visible,
-                            it.zan
-                        )
-
-                        itemList.add(item)
-
-                    }
                     adapter.notifyDataSetChanged()
 
                     if (pagination) {
