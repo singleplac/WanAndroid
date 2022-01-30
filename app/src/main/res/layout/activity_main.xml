@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/refresh"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
 
     <FrameLayout
         android:id="@+id/AppLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="576dp"
+        android:layout_weight="5"
+        android:background="@color/material_on_primary_emphasis_medium"></FrameLayout>
 
-    </FrameLayout>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:layout_alignParentBottom="true"
+        app:menu = "@menu/bottombar"/>
 
 </LinearLayout>

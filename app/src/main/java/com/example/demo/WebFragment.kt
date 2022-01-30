@@ -1,8 +1,8 @@
 package com.example.demo
 
-
 import android.os.Build
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +10,8 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.Fragment
 
-
-class webFrag : Fragment() {
-
+class WebFragment : Fragment() {
     private var webpage: WebView? = null
     private var weblink: String? = ""
 
@@ -25,7 +22,7 @@ class webFrag : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.web_frag, container, false)
+        val view = inflater.inflate(R.layout.fragment_web, container, false)
 
         webpage = view.findViewById(R.id.webpage)
         weblink = arguments?.getString("link")
@@ -51,6 +48,5 @@ class webFrag : Fragment() {
 
         return view
     }
-
 
 }

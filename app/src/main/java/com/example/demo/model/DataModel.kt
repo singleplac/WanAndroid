@@ -6,6 +6,8 @@ data class DataModel(
     val errorMsg: String
 )
 
+
+
 data class Data(
     val curPage: Int,
     val datas: List<DataX>,

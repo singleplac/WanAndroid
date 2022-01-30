@@ -2,25 +2,34 @@ package com.example.demo
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
+import com.example.demo.adpater.ItemAdapter
+import com.example.demo.network.AppService
+import com.example.demo.network.ServiceCreator
+import java.util.*
+import kotlin.collections.ArrayList
 
 
-class ItemFrag : Fragment() {
+class ItemFragment : Fragment() {
 
-    private lateinit var communicator: Communicator
+
     private lateinit var layoutManager: LinearLayoutManager
-    private lateinit var adapter: ItemFrag.ItemAdapter
+    private lateinit var adapter: ItemAdapter
     private lateinit var appService: AppService
     private lateinit var itemRecyclerview: RecyclerView
+    private lateinit var searchView: SearchView
+    private lateinit var toolbar: Toolbar
 
     var progressBar: ProgressBar? = null
     var itemList = ArrayList<DataX>()
+    var tempArrayList = ArrayList<DataX>()
     var isLoading = true
     var pageNumber = 0
 
@@ -30,15 +39,19 @@ class ItemFrag : Fragment() {
     var total = 0
     var previousTotal = 0
     var viewThreshold = 20
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
 
-
+        Log.d("ItemFragment","======setHasOptionsMenu ======")
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.item_frag, container, false)
+        val view = inflater.inflate(R.layout.fragment_item, container, false)
         itemRecyclerview = view.findViewById(R.id.itemRecyclerview)
 
         progressBar = view.findViewById(R.id.processorBar)
@@ -47,9 +60,55 @@ class ItemFrag : Fragment() {
 
         //获取Service接口的动态代理对象
         appService = ServiceCreator.create(AppService::class.java)
+        toolbar = view.findViewById(R.id.toolbar)
+        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
 
         return view
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+
+        inflater.inflate(R.menu.main_menu,menu)
+        val menuItem :MenuItem = menu.findItem(R.id.main_search)
+        searchView = menuItem.actionView as SearchView
+        Log.d("ItemFragment","======before searchView.setOnQueryTextListener ======")
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                tempArrayList.clear()
+                val searchText = newText!!.toString()
+                if(searchText.isNotEmpty()) {
+                    itemList.forEach{
+                        //目前只能搜索标题
+                        if(it.title.contains(searchText)){
+                            tempArrayList.add(it)
+                        }
+                    }
+                    adapter!!.notifyDataSetChanged()
+                    Log.d("ItemFragment","======after filter ======")
+                }else{
+                    tempArrayList.clear()
+                    tempArrayList.addAll(itemList)
+                    adapter!!.notifyDataSetChanged()
+                }
+
+
+
+                return true
+            }
+
+        })
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
+
+
 
     //使用layoutManager管理Recyclerview
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -59,7 +118,8 @@ class ItemFrag : Fragment() {
         //设置layoutManger
         layoutManager = LinearLayoutManager(activity)
         itemRecyclerview.layoutManager = layoutManager
-        adapter = ItemAdapter(itemList)
+        adapter = ItemAdapter(tempArrayList)
+
         itemRecyclerview.adapter = adapter
         retrofitService(false)
 
@@ -78,26 +138,26 @@ class ItemFrag : Fragment() {
                     pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
 
                     Log.d(
-                        "MainActivity", "total = $total, visibleItemCount  = $visibleItemCount, " +
+                        "ItemFragment", "total = $total, visibleItemCount  = $visibleItemCount, " +
                                 "pastVisibleItem = $pastVisibleItem"
                     )
 
 
                     if (isLoading) {
 
-                        Log.d("MainActivity", "is Loading...... please wait patiently")
+                        Log.d("ItemFragment", "is Loading...... please wait patiently")
 
                         if (total > previousTotal) {
                             isLoading = false
                             previousTotal = total
 
-                            Log.d("MainActivity", "previousTotal = $previousTotal , total = $total")
+                            Log.d("ItemFragment", "previousTotal = $previousTotal , total = $total")
                         }
 
                     }
 
                     Log.d(
-                        "MainActivity", "total = $total, visibleItemCount  = $visibleItemCount," +
+                        "ItemFragment", "total = $total, visibleItemCount  = $visibleItemCount," +
                                 " pastVisibleItem = $pastVisibleItem,previous_total = $previousTotal "
                     )
 
@@ -105,7 +165,7 @@ class ItemFrag : Fragment() {
 
                         pageNumber++
 
-                        Log.d("MainActivity", "Loading page is $pageNumber")
+                        Log.d("ItemFragment", "Loading page is $pageNumber")
 
                         performPagination()
 
@@ -132,11 +192,11 @@ class ItemFrag : Fragment() {
                 if (responseData!!.errorCode == 0) {
 
                     itemList.addAll(responseData.data.datas)
-
                     adapter.notifyDataSetChanged()
+                    tempArrayList.addAll(itemList)
 
                     if (pagination) {
-                        Log.d("MainActivity", "page $pageNumber is loaded...")
+                        Log.d("ItemFragment", "page $pageNumber is loaded...")
                         Toast.makeText(
                             activity,
                             "page $pageNumber is loaded...",
@@ -149,7 +209,7 @@ class ItemFrag : Fragment() {
 
                 } else {
 
-                    Log.d("MainActivity", "Error loading")
+                    Log.d("ItemFragment", "Error loading")
 
                 }
 
@@ -166,76 +226,15 @@ class ItemFrag : Fragment() {
 
     private fun performPagination() {
 
-
         progressBar?.visibility = View.VISIBLE
-
         retrofitService(true)
-
         progressBar?.visibility = View.GONE
     }
 
-    //创建自己的Adapter
-    //传入list
-    inner class ItemAdapter(private val newsList: List<DataX>) :
-        RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
-
-        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-            //继承RecyclerView.ViewHolder
-
-            var title: TextView = view.findViewById(R.id.title)
-            var shareUser: TextView = view.findViewById(R.id.shareUser)
-
-        }
-
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            //创建ViewHolder实例
-
-            //引入单个item的XML
-
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.item, parent, false)
-            val holder = ViewHolder(view)
-            val title: TextView = view.findViewById(R.id.title)
-
-            if (activity != null) {
-                communicator = activity as Communicator
-            }
-
-
-            //点击标题跳转到另一个fragment
-            title.setOnClickListener {
-                Toast.makeText(parent.context, "${title.text} is clicked", Toast.LENGTH_SHORT)
-                    .show()
-
-                val item = newsList[holder.adapterPosition]
-                if (item.title != null && context != null) {
-
-                    //调用接口传参
-                    communicator.passDataCom(item.link)
-
-                }
-
-            }
-
-            return holder
-
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-
-            val item = newsList[position]
-            //设置参数
-            holder.title.text = item.title
-            holder.shareUser.text = item.shareUser
-
-        }
-
-        override fun getItemCount() = newsList.size
-
-    }
 
 
 }
+
+
+

@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Demo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="main_search">Search</string>
+    <string name="my_collections">收藏</string>
+    <string name="my_about">关于</string>
+    <string name="user_name">Zelda</string>
+    <string name="appName">wanAndroid</string>
+    <string name="search_hint">搜索文章...</string>
+    <string name="search_hot_words">搜索热词</string>
+    <string name="placeholder">There will be something in the future...</string>
+    <string name="search_button">搜索</string>
 </resources>
