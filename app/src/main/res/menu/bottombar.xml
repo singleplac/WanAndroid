@@ -22,13 +22,22 @@
         android:title="我的">
 
     </item>
-    <item
-        android:id="@+id/tab_menu_system"
-        android:enabled="true"
-        android:icon="@drawable/ic_system"
-        android:title="体系">
 
-    </item>
+<!--    <item-->
+<!--        android:id="@+id/tab_menu_system"-->
+<!--        android:enabled="true"-->
+<!--        android:icon="@drawable/ic_system"-->
+<!--        android:title="体系">-->
+
+<!--    </item>-->
+
+        <item
+            android:id="@+id/tab_test_fragment"
+            android:enabled="true"
+            android:icon="@drawable/ic_system"
+            android:title="登陆">
+
+        </item>
     <item
         android:id="@+id/tab_menu_project"
         android:enabled="true"

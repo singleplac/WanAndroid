@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity(), Communicator {
         mFragments.add(ItemFragment()) //ItemFrag is Homepage
         mFragments.add(SearchFragment())
         mFragments.add(MyFragment())
+        mFragments.add(LogInFragment())
         //初始化展示MessageFragment
         setFragmentPosition(0)
 
@@ -48,6 +49,8 @@ class MainActivity : AppCompatActivity(), Communicator {
             R.id.tab_menu_home -> setFragmentPosition(0)
             R.id.tab_menu_search -> setFragmentPosition(1)
             R.id.tab_menu_my -> setFragmentPosition(2)
+            R.id.tab_test_fragment ->setFragmentPosition(3)
+
             else -> { }
         }
         true
