@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3026041666666667" />
+        <entry key="app/src/main/res/drawable/app_vector_favorite.xml" value="0.2171875" />
         <entry key="app/src/main/res/drawable/clickbottombar.xml" value="0.3026041666666667" />
         <entry key="app/src/main/res/drawable/ic_arrow_back_24.xml" value="0.2234375" />
         <entry key="app/src/main/res/drawable/ic_clear_black_24dp.xml" value="0.440625" />
@@ -12,14 +13,23 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3026041666666667" />
         <entry key="app/src/main/res/drawable/ic_my.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/drawable/ic_person.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/ic_project.xml" value="0.30520833333333336" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/ic_system.xml" value="0.30520833333333336" />
+        <entry key="app/src/main/res/drawable/item_favorite_selected.xml" value="0.22135416666666666" />
+        <entry key="app/src/main/res/drawable/item_favorite_selector.xml" value="0.22135416666666666" />
+        <entry key="app/src/main/res/drawable/item_favorite_unselected.xml" value="0.22135416666666666" />
+        <entry key="app/src/main/res/drawable/shape_more_tab_shadow.xml" value="0.2171875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2935610665501797" />
         <entry key="app/src/main/res/layout/blank_fragment.xml" value="0.41041666666666665" />
         <entry key="app/src/main/res/layout/bottom_navigation_item_selector.xml" value="0.2864583333333333" />
+        <entry key="app/src/main/res/layout/fragment_collection.xml" value="0.4244791666666667" />
         <entry key="app/src/main/res/layout/fragment_item.xml" value="0.20729166666666668" />
         <entry key="app/src/main/res/layout/fragment_log_in.xml" value="0.2897046626930961" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.41041666666666665" />
         <entry key="app/src/main/res/layout/fragment_my.xml" value="0.20989583333333334" />
+        <entry key="app/src/main/res/layout/fragment_project_articles.xml" value="0.20052083333333334" />
+        <entry key="app/src/main/res/layout/fragment_projects.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_web.xml" value="0.20729166666666668" />
         <entry key="app/src/main/res/layout/fragment_web2.xml" value="0.20052083333333334" />

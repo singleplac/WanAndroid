@@ -13,8 +13,13 @@ import androidx.appcompat.widget.Toolbar
 import com.example.demo.adpater.ItemAdapter
 import com.example.demo.network.AppService
 import com.example.demo.network.ServiceCreator
-import java.util.*
 import kotlin.collections.ArrayList
+import android.widget.ImageButton
+
+import android.view.MotionEvent
+
+import android.view.View
+import android.view.View.OnTouchListener
 
 
 class ItemFragment : Fragment() {
@@ -26,6 +31,8 @@ class ItemFragment : Fragment() {
     private lateinit var itemRecyclerview: RecyclerView
     private lateinit var searchView: SearchView
     private lateinit var toolbar: Toolbar
+    private lateinit var myFavorite: ImageButton
+
 
     var progressBar: ProgressBar? = null
     var itemList = ArrayList<DataX>()
@@ -52,7 +59,10 @@ class ItemFragment : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_item, container, false)
+
         itemRecyclerview = view.findViewById(R.id.itemRecyclerview)
+
+//        myFavorite = view.findViewById(R.id.item_favorite)
 
         progressBar = view.findViewById(R.id.processorBar)
 
@@ -115,6 +125,18 @@ class ItemFragment : Fragment() {
 
         super.onActivityCreated(savedInstanceState)
 
+//        myFavorite.setOnTouchListener { v, event ->
+//            if (event.action == MotionEvent.ACTION_DOWN) {
+//                Log.d("ItemFragment","The favorite button is clicked")
+//                //重新设置按下时的背景图片
+//                (v as ImageButton).setImageDrawable(resources.getDrawable(R.drawable.item_favorite_selected))
+//            } else if (event.action == MotionEvent.ACTION_UP) {
+//                //再修改为抬起时的正常图片
+//                (v as ImageButton).setImageDrawable(resources.getDrawable(R.drawable.item_favorite_unselected))
+//            }
+//            false
+//        }
+
         //设置layoutManger
         layoutManager = LinearLayoutManager(activity)
         itemRecyclerview.layoutManager = layoutManager
@@ -123,8 +145,8 @@ class ItemFragment : Fragment() {
         itemRecyclerview.adapter = adapter
         retrofitService(false)
 
-        //滑动窗口监控
 
+        //滑动窗口监控
         itemRecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

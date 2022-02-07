@@ -1,7 +1,9 @@
 package com.example.demo.network
 
-import android.text.Editable
 import com.example.demo.DataModel
+import com.example.demo.model.DataX
+import com.example.demo.model.LogInModel
+import com.example.demo.model.ProjectsTreeModel
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -57,7 +59,7 @@ interface AppService {
     fun logIn(
         @Query("username") username: String?,
         @Query("password") password: String?
-    ): retrofit2.Call<DataModel>
+    ): retrofit2.Call<LogInModel>
 
     /**
      * 获取收藏文章列表
@@ -85,6 +87,24 @@ interface AppService {
     fun cancelCollectArticle(
         @Path("id") id: Int,
         @Query("originId") originId: Int
+    ): retrofit2.Call<DataModel>
+
+
+    /**
+     * 项目分类
+     * @return
+     */
+    @GET("/project/tree/json")
+    fun getProjectCategory(): retrofit2.Call<ProjectsTreeModel>
+
+    /**
+     * 项目列表数据
+     * @return
+     */
+    @GET("/project/list/{page}/json")
+    fun getProjectList(
+        @Path("page") page: Int,
+        @Query("cid") cid: Int
     ): retrofit2.Call<DataModel>
 
 }

@@ -32,5 +32,7 @@
     <string name="login_failed">Login failed</string>
     <string name="login_desc">To vanish a warning[Missing contentDescription attribute on image]</string>
 
+    <!-- Strings related to collection -->
+    <string name="collect_toolbarName">Collection</string>
 
 </resources>

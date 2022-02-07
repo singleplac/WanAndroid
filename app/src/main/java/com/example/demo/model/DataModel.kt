@@ -6,8 +6,6 @@ data class DataModel(
     val errorMsg: String
 )
 
-
-
 data class Data(
     val curPage: Int,
     val datas: List<DataX>,
@@ -17,6 +15,7 @@ data class Data(
     val size: Int,
     val total: Int
 )
+
 
 data class DataX(
     val apkLink: String,

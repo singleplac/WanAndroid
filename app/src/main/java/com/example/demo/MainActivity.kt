@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity(), Communicator {
         bundle.putString("link", editTextInput)
 
         val transaction = this.supportFragmentManager.beginTransaction()
-
         val webFrag = WebFragment()
         webFrag.arguments = bundle
         transaction.replace(R.id.AppLayout, webFrag)
@@ -38,6 +37,7 @@ class MainActivity : AppCompatActivity(), Communicator {
         mFragments.add(SearchFragment())
         mFragments.add(MyFragment())
         mFragments.add(LogInFragment())
+        mFragments.add(ProjectsFragment())
         //初始化展示MessageFragment
         setFragmentPosition(0)
 
@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity(), Communicator {
             R.id.tab_menu_search -> setFragmentPosition(1)
             R.id.tab_menu_my -> setFragmentPosition(2)
             R.id.tab_test_fragment ->setFragmentPosition(3)
+            R.id.tab_menu_project ->setFragmentPosition(4)
 
             else -> { }
         }

@@ -21,6 +21,11 @@ class ItemAdapter(private var newsList: ArrayList<DataX>) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>(){
     private lateinit var communicator: Communicator
 
+    private lateinit var  title: TextView
+    private lateinit var  shareUser: TextView
+    private lateinit var niceData: TextView
+    private lateinit var chapterName: TextView
+
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -28,6 +33,8 @@ class ItemAdapter(private var newsList: ArrayList<DataX>) :
 
         var title: TextView = view.findViewById(R.id.title)
         var shareUser: TextView = view.findViewById(R.id.shareUser)
+        val niceData: TextView = view.findViewById(R.id.niceDate)
+        val chapterName: TextView = view.findViewById(R.id.chapterName)
 
     }
 
@@ -38,7 +45,9 @@ class ItemAdapter(private var newsList: ArrayList<DataX>) :
 
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item, parent, false)
         val holder = ViewHolder(view)
-        val title: TextView = view.findViewById(R.id.title)
+        title= view.findViewById(R.id.title)
+
+
 
         communicator = parent.context as MainActivity
         //点击标题跳转到另一个fragment
@@ -62,6 +71,8 @@ class ItemAdapter(private var newsList: ArrayList<DataX>) :
         //设置参数
         holder.title.text = item.title
         holder.shareUser.text = item.shareUser
+        holder.chapterName.text = item.chapterName
+        holder.niceData.text = item.niceDate
     }
 
     override fun getItemCount() = newsList.size
