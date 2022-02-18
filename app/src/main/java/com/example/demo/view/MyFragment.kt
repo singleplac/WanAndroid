@@ -1,4 +1,4 @@
-package com.example.demo
+package com.example.demo.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,9 +9,11 @@ import android.widget.LinearLayout
 import android.text.TextUtils
 import android.util.Log
 import android.widget.TextView
+import com.example.demo.MainActivity
+import com.example.demo.R
+import com.example.demo.WanAndroidApplication
 import com.example.demo.utils.SPUtil
 import com.example.demo.constants.Constants
-import java.util.function.LongFunction
 
 
 class MyFragment : Fragment() {

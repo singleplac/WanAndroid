@@ -1,9 +1,8 @@
 package com.example.demo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import com.example.demo.view.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), Communicator {

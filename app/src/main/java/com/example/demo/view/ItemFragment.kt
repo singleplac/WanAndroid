@@ -1,4 +1,4 @@
-package com.example.demo
+package com.example.demo.view
 
 import android.os.Bundle
 import android.util.Log
@@ -16,10 +16,10 @@ import com.example.demo.network.ServiceCreator
 import kotlin.collections.ArrayList
 import android.widget.ImageButton
 
-import android.view.MotionEvent
-
 import android.view.View
-import android.view.View.OnTouchListener
+import com.example.demo.DataModel
+import com.example.demo.DataX
+import com.example.demo.R
 
 
 class ItemFragment : Fragment() {

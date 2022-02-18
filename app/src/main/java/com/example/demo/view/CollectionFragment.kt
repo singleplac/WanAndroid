@@ -1,4 +1,4 @@
-package com.example.demo
+package com.example.demo.view
 
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.demo.DataModel
+import com.example.demo.DataX
+import com.example.demo.R
 import com.example.demo.adpater.ItemAdapter
 import com.example.demo.network.AppService
 import com.example.demo.network.ServiceCreator

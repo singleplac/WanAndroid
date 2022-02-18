@@ -1,4 +1,4 @@
-package com.example.demo
+package com.example.demo.view
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import com.example.demo.MainActivity
+import com.example.demo.R
+import com.example.demo.WanAndroidApplication
 import com.example.demo.network.AppService
 import com.example.demo.network.ServiceCreator
 import retrofit2.Call

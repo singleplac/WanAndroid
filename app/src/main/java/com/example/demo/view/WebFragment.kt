@@ -1,4 +1,4 @@
-package com.example.demo
+package com.example.demo.view
 
 import android.os.Build
 import android.os.Bundle
@@ -10,6 +10,7 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.annotation.RequiresApi
+import com.example.demo.R
 
 class WebFragment : Fragment() {
     private var webpage: WebView? = null

@@ -1,4 +1,4 @@
-package com.example.demo
+package com.example.demo.view
 
 import android.os.Bundle
 import android.util.Log
@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.ViewPager
-import com.example.demo.adpater.ItemAdapter
+import com.example.demo.R
 import com.example.demo.adpater.ProjectAdapter
 import com.example.demo.model.DataX
 import com.example.demo.model.ProjectsTreeModel
