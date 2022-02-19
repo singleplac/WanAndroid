@@ -1,12 +1,12 @@
 package com.example.demo.model
 
 data class ProjectsTreeModel(
-    val `data`: List<DataX>,
+    val `data`: List<ProjectData>,
     val errorCode: Int,
     val errorMsg: String
 )
 
-data class DataX (
+data class ProjectData (
     val children: List<Any>,
     val courseId: Int,
     val id: Int,

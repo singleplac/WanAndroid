@@ -3,6 +3,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.demo.view.*
+import com.example.demo.view.project.ProjectsFragment
+import com.example.demo.view.project.ProjectsFragmentViewPage
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), Communicator {
@@ -36,7 +38,8 @@ class MainActivity : AppCompatActivity(), Communicator {
         mFragments.add(SearchFragment())
         mFragments.add(MyFragment())
         mFragments.add(LogInFragment())
-        mFragments.add(ProjectsFragment())
+//        mFragments.add(ProjectsFragment())
+        mFragments.add(ProjectsFragmentViewPage())
         //初始化展示MessageFragment
         setFragmentPosition(0)
 

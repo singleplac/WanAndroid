@@ -17,9 +17,15 @@ import kotlin.collections.ArrayList
 import android.widget.ImageButton
 
 import android.view.View
-import com.example.demo.DataModel
-import com.example.demo.DataX
+import androidx.viewpager2.widget.ViewPager2
 import com.example.demo.R
+import com.example.demo.adpater.BannerAdapter
+import com.example.demo.model.BannerDataModel
+import com.example.demo.model.DataBanner
+import com.example.demo.model.DataModel
+import com.example.demo.model.DataX
+import retrofit2.Call
+import retrofit2.Response
 
 
 class ItemFragment : Fragment() {
@@ -27,16 +33,19 @@ class ItemFragment : Fragment() {
 
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var adapter: ItemAdapter
+    private lateinit var bannerAdapter: BannerAdapter
     private lateinit var appService: AppService
     private lateinit var itemRecyclerview: RecyclerView
     private lateinit var searchView: SearchView
     private lateinit var toolbar: Toolbar
     private lateinit var myFavorite: ImageButton
+    private lateinit var viewPager: ViewPager2
 
 
     var progressBar: ProgressBar? = null
     var itemList = ArrayList<DataX>()
     var tempArrayList = ArrayList<DataX>()
+    var bannerList = ArrayList<DataBanner>()
     var isLoading = true
     var pageNumber = 0
 
@@ -60,16 +69,22 @@ class ItemFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_item, container, false)
 
+        viewPager = view.findViewById(R.id.bannerViewPager)
+
+
         itemRecyclerview = view.findViewById(R.id.itemRecyclerview)
 
 //        myFavorite = view.findViewById(R.id.item_favorite)
 
         progressBar = view.findViewById(R.id.processorBar)
-
         progressBar?.visibility = View.VISIBLE
 
         //获取Service接口的动态代理对象
         appService = ServiceCreator.create(AppService::class.java)
+        //获取banner data
+        applyBanner()
+
+        //设置toolbar
         toolbar = view.findViewById(R.id.toolbar)
         (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
 
@@ -116,7 +131,27 @@ class ItemFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    private fun applyBanner() {
+        bannerAdapter = BannerAdapter(bannerList)
+        viewPager.adapter = bannerAdapter
+        appService.getBannerData().enqueue(object : retrofit2.Callback<BannerDataModel> {
+            override fun onResponse(
+                call: Call<BannerDataModel>,
+                response: Response<BannerDataModel>
+            ) {
+                val responseData = response.body()
+                if(responseData!=null){
+                    bannerList.addAll(responseData.data)
+                    bannerAdapter!!.notifyDataSetChanged()
+                }
+            }
 
+            override fun onFailure(call: Call<BannerDataModel>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+    }
 
 
 
@@ -237,7 +272,7 @@ class ItemFragment : Fragment() {
 
             }
 
-            override fun onFailure(call: retrofit2.Call<DataModel>, t: Throwable) {
+            override fun onFailure(call: Call<DataModel>, t: Throwable) {
                 t.printStackTrace()
             }
 

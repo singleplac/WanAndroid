@@ -1,25 +1,28 @@
 package com.example.demo.adpater
 
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.viewpager.widget.PagerAdapter
-import com.example.demo.DataX
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.example.demo.model.ProjectData
 import com.example.demo.model.ProjectsTreeModel
 import java.util.ArrayList
 
-class ProjectAdapter : PagerAdapter() {
+class ProjectAdapter (private var projectCategoryList:ArrayList<ProjectData>): RecyclerView.Adapter<ProjectAdapter.ViewHolder>() {
     private lateinit var newsList: ArrayList<ProjectsTreeModel>
 
-    override fun getCount(): Int {
+   inner class ViewHolder(view: View) :RecyclerView.ViewHolder(view) {
+
+   }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         TODO("Not yet implemented")
     }
 
-
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         TODO("Not yet implemented")
     }
+
+    override fun getItemCount() = projectCategoryList.size
 
 
 }

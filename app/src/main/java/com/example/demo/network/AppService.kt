@@ -1,7 +1,7 @@
 package com.example.demo.network
 
-import com.example.demo.DataModel
-import com.example.demo.model.DataX
+import com.example.demo.model.BannerDataModel
+import com.example.demo.model.DataModel
 import com.example.demo.model.LogInModel
 import com.example.demo.model.ProjectsTreeModel
 import retrofit2.http.GET
@@ -106,5 +106,12 @@ interface AppService {
         @Path("page") page: Int,
         @Query("cid") cid: Int
     ): retrofit2.Call<DataModel>
+
+    /**
+     * 获取banner数据
+     * @retrun
+     */
+    @GET("/banner/json")
+    fun getBannerData() : retrofit2.Call<BannerDataModel>
 
 }

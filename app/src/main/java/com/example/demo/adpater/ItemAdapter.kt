@@ -1,20 +1,15 @@
 package com.example.demo.adpater
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.demo.Communicator
-import com.example.demo.DataX
 import com.example.demo.MainActivity
 import com.example.demo.R
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.example.demo.model.DataX
 import java.util.*
 
 class ItemAdapter(private var newsList: ArrayList<DataX>) :

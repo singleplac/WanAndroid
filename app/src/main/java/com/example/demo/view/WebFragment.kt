@@ -27,6 +27,8 @@ class WebFragment : Fragment() {
 
         webpage = view.findViewById(R.id.webpage)
         weblink = arguments?.getString("link")
+
+        //简书网页加载不了
         if (weblink!!.contains("jianshu", ignoreCase = true)) {
             weblink!!.replace("https", "http")
 

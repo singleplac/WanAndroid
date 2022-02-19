@@ -1,12 +1,12 @@
 package com.example.demo.model
 
 data class LogInModel(
-    val `data`: Data,
+    val `data`: DataLogin,
     val errorCode: Int,
     val errorMsg: String
 )
 
-data class Data(
+data class DataLogin(
     val admin: Boolean,
     val chapterTops: List<Any>,
     val coinCount: Int,

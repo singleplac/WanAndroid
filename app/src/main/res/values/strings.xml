@@ -35,4 +35,8 @@
     <!-- Strings related to collection -->
     <string name="collect_toolbarName">Collection</string>
 
+    <!-- Strings related to projects -->
+    <string name="projects_toolbar_title">项目</string>
+
+
 </resources>
