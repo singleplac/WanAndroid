@@ -1,9 +1,6 @@
 package com.example.demo.network
 
-import com.example.demo.model.BannerDataModel
-import com.example.demo.model.DataModel
-import com.example.demo.model.LogInModel
-import com.example.demo.model.ProjectsTreeModel
+import com.example.demo.model.*
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -47,7 +44,7 @@ interface AppService {
      * 搜索热词
      */
     @GET("/hotkey/json")
-    fun getHotKey(): retrofit2.Call<DataModel>
+    fun getHotKey(): retrofit2.Call<HotKeyModel>
 
     /**
      * 登录
@@ -109,7 +106,7 @@ interface AppService {
 
     /**
      * 获取banner数据
-     * @retrun
+     * @return
      */
     @GET("/banner/json")
     fun getBannerData() : retrofit2.Call<BannerDataModel>

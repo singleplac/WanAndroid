@@ -3,8 +3,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.demo.view.*
-import com.example.demo.view.project.ProjectsFragment
 import com.example.demo.view.project.ProjectsFragmentViewPage
+import com.example.demo.view.search.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), Communicator {

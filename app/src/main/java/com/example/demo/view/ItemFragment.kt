@@ -17,6 +17,7 @@ import kotlin.collections.ArrayList
 import android.widget.ImageButton
 
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.viewpager2.widget.ViewPager2
 import com.example.demo.R
 import com.example.demo.adpater.BannerAdapter
@@ -105,6 +106,7 @@ class ItemFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+
                 tempArrayList.clear()
                 val searchText = newText!!.toString()
                 if(searchText.isNotEmpty()) {

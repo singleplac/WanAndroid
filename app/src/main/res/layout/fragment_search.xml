@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.SearchFragment">
-
+    tools:context=".view.search.SearchFragment">
 
 
     <LinearLayout
@@ -30,8 +28,8 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
                 android:src="@drawable/ic_arrow_back_24"
-                android:transitionName="search"
-                />
+                android:visibility="gone"
+                android:transitionName="search" />
 
 
             <EditText
@@ -46,40 +44,77 @@
                 android:hint="@string/search_hint" />
 
         </LinearLayout>
+
         <Button
             android:id="@+id/search_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "@string/search_button"
-            android:textColor="@color/black"/>
+            android:text="@string/search_button"
+            android:textColor="@color/black" />
 
     </LinearLayout>
-    <RelativeLayout
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/search_articles_recyclerview"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <LinearLayout
-            android:id="@+id/ll_hot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search_hot_words"
-                android:textStyle="bold"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="10dp"/>
-            <RelativeLayout
+            android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/search_text_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/search_hot_words"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <com.zhy.view.flowlayout.TagFlowLayout
+                    android:id="@+id/hotWords_fl"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginRight="6dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/search_text_top"
+                    app:max_select="10">
+
+                </com.zhy.view.flowlayout.TagFlowLayout>
+
+                <TextView
+                    android:id="@+id/search_results"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/search_hot_words_results"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hotWords_fl" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/search_articles_recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </RelativeLayout>
-        </LinearLayout>
-
-    </RelativeLayout>
-</androidx.appcompat.widget.LinearLayoutCompat>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/search_results"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3026041666666667" />
         <entry key="app/src/main/res/drawable/app_vector_favorite.xml" value="0.2171875" />
         <entry key="app/src/main/res/drawable/clickbottombar.xml" value="0.3026041666666667" />
+        <entry key="app/src/main/res/drawable/flow_selector.xml" value="0.25729166666666664" />
         <entry key="app/src/main/res/drawable/ic_arrow_back_24.xml" value="0.2234375" />
         <entry key="app/src/main/res/drawable/ic_clear_black_24dp.xml" value="0.440625" />
         <entry key="app/src/main/res/drawable/ic_home_selected.xml" value="0.22604166666666667" />
@@ -34,9 +35,10 @@
         <entry key="app/src/main/res/layout/fragment_project_articles2.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/fragment_projects.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/fragment_projects_view_page.xml" value="0.23020833333333332" />
-        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.12115942028985507" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.2657122208506141" />
         <entry key="app/src/main/res/layout/fragment_web.xml" value="0.20729166666666668" />
         <entry key="app/src/main/res/layout/fragment_web2.xml" value="0.20052083333333334" />
+        <entry key="app/src/main/res/layout/hotwords.xml" value="0.4244791666666667" />
         <entry key="app/src/main/res/layout/item.xml" value="0.20923913043478262" />
         <entry key="app/src/main/res/layout/item_frag.xml" value="0.20923913043478262" />
         <entry key="app/src/main/res/layout/test.xml" value="0.27239583333333334" />
