@@ -1,11 +1,26 @@
-This project uses RecyclerView + Retrofit2 + WebView to build a news App. 
+#### 简介
+这是基于kotlin和WanAndroid开放API的APP。
 
-The first fragment shows the list of news with its title and author name. When you click on the title, the fragment will jump into another fragment, which is the link to the original article.
-The first fragment could be scrolled down to load more items from the JSON link into RecyclerView.
 
-![Image description](https://images.gitee.com/uploads/images/2022/0102/160633_b3ff4ff0_8073068.png "News.png")
+#### 目前实现功能
+1. 首页页面
+- 首页banner： ViewPager2 + RecyclerView.Adapter
+- 首页文章展示  RecyclerView + Retrofit2 + WebView
+- 基于首页RecyclerView中已有文章搜索 menu + SearchView
+2. 搜索页面
+- 返回对文章标题的检索
+- 搜索热词 使用[鸿洋 FlowLayout](https://github.com/hongyangAndroid/FlowLayout)
+3. 项目
+- 获取项目目录 ViewPage + TabLayout
+- 返回相应目录下的文章
+4. 个人页面
+- 实现UI
+5. 登录
+- 使用OKHTTP读取和返回cookies，使用SharedPreferences存储登录响应中返回的包含用户名和密码的cookies（有待完善）
 
-The link of data: https://www.wanandroid.com/article/list/0/json
+
+#### 其它
+The open API: https://www.wanandroid.com/
 
 
 
