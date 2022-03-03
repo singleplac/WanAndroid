@@ -15,13 +15,7 @@
         android:title="搜索">
 
     </item>
-    <item
-        android:id="@+id/tab_menu_my"
-        android:enabled="true"
-        android:icon="@drawable/ic_my"
-        android:title="我的">
 
-    </item>
 
 <!--    <item-->
 <!--        android:id="@+id/tab_menu_system"-->
@@ -45,5 +39,11 @@
         android:title="项目">
 
     </item>
+    <item
+        android:id="@+id/tab_menu_my"
+        android:enabled="true"
+        android:icon="@drawable/ic_my"
+        android:title="我的">
 
+    </item>
 </menu>

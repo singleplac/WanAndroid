@@ -6,6 +6,9 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3026041666666667" />
         <entry key="app/src/main/res/drawable/app_vector_favorite.xml" value="0.2171875" />
         <entry key="app/src/main/res/drawable/clickbottombar.xml" value="0.3026041666666667" />
+        <entry key="app/src/main/res/drawable/collect_selected_icon.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/drawable/collect_selector.xml" value="0.2604166666666667" />
+        <entry key="app/src/main/res/drawable/collect_selector_icon.xml" value="0.2604166666666667" />
         <entry key="app/src/main/res/drawable/flow_selector.xml" value="0.25729166666666664" />
         <entry key="app/src/main/res/drawable/ic_arrow_back_24.xml" value="0.2234375" />
         <entry key="app/src/main/res/drawable/ic_clear_black_24dp.xml" value="0.440625" />
@@ -21,6 +24,7 @@
         <entry key="app/src/main/res/drawable/item_favorite_selector.xml" value="0.22135416666666666" />
         <entry key="app/src/main/res/drawable/item_favorite_unselected.xml" value="0.22135416666666666" />
         <entry key="app/src/main/res/drawable/shape_more_tab_shadow.xml" value="0.2171875" />
+        <entry key="app/src/main/res/drawable/uncollect_selector_icon.xml" value="0.2604166666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2935610665501797" />
         <entry key="app/src/main/res/layout/banner.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/blank_fragment.xml" value="0.41041666666666665" />

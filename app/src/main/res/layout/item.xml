@@ -4,73 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    app:cardCornerRadius="5dp"
-    app:elevation="3dp">
+    android:layout_marginStart="@dimen/safe_padding"
+    android:layout_marginTop="@dimen/safe_padding"
+    android:layout_marginEnd="@dimen/safe_padding"
+    android:layout_marginBottom="@dimen/safe_padding"
+    app:cardCornerRadius="@dimen/materialCard_Round_Radius"
+    app:elevation="@dimen/materialCard_elevation">
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+
+        <TextView
+            android:id="@+id/shareUser"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_weight="2"
+            android:textColor="#B0E0E6"
+            android:text="作者"
+            android:textSize="@dimen/date_text_size"
+            android:layout_marginStart="@dimen/safe_padding"
+            android:layout_marginTop="@dimen/item_margin_top"
+            android:layout_marginEnd="@dimen/safe_padding"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/shareUser"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:textColor="#B0E0E6" />
+        <TextView
+            android:id="@+id/niceDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/safe_padding"
+            android:layout_marginRight="@dimen/safe_padding"
+            android:layout_weight="4"
+            android:text="2022"
+            android:textColor="#B0E0E6"
+            android:textSize="@dimen/date_text_size"
+            app:layout_constraintBottom_toBottomOf="@+id/shareUser"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/shareUser" />
 
-            <TextView
-                android:id="@+id/niceDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:textColor="#B0E0E6" />
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/safe_padding"
+            android:layout_marginTop="@dimen/item_margin_top"
+            android:layout_marginEnd="@dimen/safe_padding"
+            android:text = "文章标题"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shareUser"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="346dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="4" />
-
-            <ImageButton
-                android:id="@+id/item_favorite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/item_favorite_selector"
-                android:contentDescription="@null"
-                android:padding="0dp" />
-
-        </LinearLayout>
 
 
         <TextView
             android:id="@+id/chapterName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:textColor="#B0E0E6" />
+            android:layout_marginStart="@dimen/safe_padding"
+            android:layout_marginTop="@dimen/item_margin_top"
+            android:layout_marginEnd="@dimen/safe_padding"
+            android:layout_marginBottom="@dimen/item_margin_top"
+            android:text="分类·项目"
+            android:textColor="#B0E0E6"
+            android:textSize="@dimen/date_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"/>
+
+        <ImageView
+            android:id="@+id/item_list_collect"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="@dimen/safe_padding"
+            android:src="@drawable/collect_selector"
+            app:layout_constraintBottom_toBottomOf="@+id/chapterName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/chapterName" />
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </com.google.android.material.card.MaterialCardView>

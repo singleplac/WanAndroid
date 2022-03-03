@@ -36,10 +36,11 @@ class MainActivity : AppCompatActivity(), Communicator {
         mFragments = ArrayList()
         mFragments.add(ItemFragment()) //ItemFrag is Homepage
         mFragments.add(SearchFragment())
-        mFragments.add(MyFragment())
         mFragments.add(LogInFragment())
 //        mFragments.add(ProjectsFragment())
         mFragments.add(ProjectsFragmentViewPage())
+        mFragments.add(MyFragment())
+        mFragments.add(CollectionFragment())
         //初始化展示MessageFragment
         setFragmentPosition(0)
 
@@ -50,9 +51,9 @@ class MainActivity : AppCompatActivity(), Communicator {
         when(item.itemId){
             R.id.tab_menu_home -> setFragmentPosition(0)
             R.id.tab_menu_search -> setFragmentPosition(1)
-            R.id.tab_menu_my -> setFragmentPosition(2)
-            R.id.tab_test_fragment ->setFragmentPosition(3)
-            R.id.tab_menu_project ->setFragmentPosition(4)
+            R.id.tab_test_fragment ->setFragmentPosition(2)
+            R.id.tab_menu_project ->setFragmentPosition(3)
+            R.id.tab_menu_my -> setFragmentPosition(4)
 
             else -> { }
         }

@@ -6,19 +6,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.demo.R
-import com.example.demo.adpater.ItemAdapter
-import com.example.demo.model.DataModel
-import com.example.demo.model.DataX
+import com.example.demo.adpater.CollectAdapter
+import com.example.demo.model.CollectModel
+import com.example.demo.model.DataXCollect
 import com.example.demo.network.AppService
 import com.example.demo.network.ServiceCreator
+import com.example.demo.utils.LoginUtil
 
 class CollectionFragment : Fragment() {
 
     private lateinit var layoutManager: LinearLayoutManager
-    private lateinit var adapter: ItemAdapter
+    private lateinit var adapter: CollectAdapter
     private lateinit var appService: AppService
     private lateinit var collectionRecyclerview: RecyclerView
 
@@ -32,7 +34,7 @@ class CollectionFragment : Fragment() {
     var isLoading = true
 
 
-    var articleList = ArrayList<DataX>()
+    var articleList = ArrayList<DataXCollect>()
 
     private var pageNumber = 0
 
@@ -46,10 +48,10 @@ class CollectionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view :View = inflater.inflate(R.layout.fragment_collection, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_collection, container, false)
         collectionRecyclerview = view.findViewById(R.id.collect_article_Recyclerview)
         //获取Service接口的动态代理对象
-        appService = ServiceCreator.create(AppService::class.java)
+        appService = ServiceCreator.createWithCookies(AppService::class.java)
         return view
     }
 
@@ -58,9 +60,10 @@ class CollectionFragment : Fragment() {
         //initialize
         layoutManager = LinearLayoutManager(activity)
         collectionRecyclerview.layoutManager = layoutManager
-        adapter = ItemAdapter(articleList)
-
+        adapter = CollectAdapter(articleList)
         collectionRecyclerview.adapter = adapter
+
+
         retrofitService()
 
         //滑动窗口监控
@@ -77,7 +80,8 @@ class CollectionFragment : Fragment() {
                     pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
 
                     Log.d(
-                        "CollectionFragment", "total = $total, visibleItemCount  = $visibleItemCount, " +
+                        "CollectionFragment",
+                        "total = $total, visibleItemCount  = $visibleItemCount, " +
                                 "pastVisibleItem = $pastVisibleItem"
                     )
 
@@ -90,7 +94,10 @@ class CollectionFragment : Fragment() {
                             isLoading = false
                             previousTotal = total
 
-                            Log.d("CollectionFragment", "previousTotal = $previousTotal , total = $total")
+                            Log.d(
+                                "CollectionFragment",
+                                "previousTotal = $previousTotal , total = $total"
+                            )
                         }
 
                     }
@@ -113,20 +120,29 @@ class CollectionFragment : Fragment() {
 
     }
 
-    private fun retrofitService(){
+    private fun retrofitService() {
 //        appService.getCollectList(pageNumber)
-        appService.getAppData(pageNumber)
-            .enqueue(object : retrofit2.Callback<DataModel> {
+        appService.getCollectList(pageNumber)
+            .enqueue(object : retrofit2.Callback<CollectModel> {
 
                 override fun onResponse(
-                    call: retrofit2.Call<DataModel>,
-                    response: retrofit2.Response<DataModel>
+                    call: retrofit2.Call<CollectModel>,
+                    response: retrofit2.Response<CollectModel>
                 ) {
                     val responseData = response.body()
-                    if (responseData != null) {
-                        articleList.clear()
-                        articleList.addAll(responseData.data.datas)
-                        adapter.notifyDataSetChanged()
+                    var errorCode = responseData?.errorCode
+                    var testmsg = responseData?.errorMsg
+                    Log.d("CollectionFragment","errorCode = " + "$errorCode " + "errormsg: $testmsg")
+                    if (responseData != null ) {
+                        if(LoginUtil.isLogin()){
+                            articleList.addAll(responseData.data.datas)
+                            var test = articleList[0].author
+                            Log.d("CollectionFragment","$test")
+                            adapter.notifyDataSetChanged()
+                        }else{
+                            Toast.makeText(requireActivity(),"[collectionFragment] Pls login first",Toast.LENGTH_SHORT).show()
+                        }
+
                     } else {
 
                         Log.d("CollectionFragment", "find no results ")
@@ -134,7 +150,8 @@ class CollectionFragment : Fragment() {
 
 
                 }
-                override fun onFailure(call: retrofit2.Call<DataModel>, t: Throwable) {
+
+                override fun onFailure(call: retrofit2.Call<CollectModel>, t: Throwable) {
                     t.printStackTrace()
                 }
             })

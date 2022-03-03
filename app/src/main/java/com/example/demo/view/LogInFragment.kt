@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import com.blankj.utilcode.util.SPUtils
 import com.example.demo.MainActivity
 import com.example.demo.R
 import com.example.demo.WanAndroidApplication
@@ -16,7 +18,6 @@ import com.example.demo.network.AppService
 import com.example.demo.network.ServiceCreator
 import retrofit2.Call
 import retrofit2.Response
-import com.example.demo.utils.SPUtil
 import com.example.demo.constants.Constants
 import com.example.demo.model.LogInModel
 import retrofit2.Callback
@@ -52,7 +53,7 @@ class LogInFragment : Fragment() {
         password = view.findViewById(R.id.password)
         register = view.findViewById(R.id.register)
         login = view.findViewById(R.id.login)
-        appService = ServiceCreator.create(AppService::class.java)
+        appService = ServiceCreator.createWithCookies(AppService::class.java)
         return view
     }
 
@@ -68,16 +69,21 @@ class LogInFragment : Fragment() {
                         response: Response<LogInModel>
                     ) {
                         if(response.body()?.errorCode ==0) {
-//                                保存用户名和密码
-                            SPUtil.put(WanAndroidApplication.context,Constants.USERNAME, username)
-                            SPUtil.put(WanAndroidApplication.context,Constants.PASSWORD, password)
-                            Log.d("LogInFragment","log in successfully")
+                            Toast.makeText(requireActivity(),"[LoginFragment] Login Successfully", Toast.LENGTH_SHORT).show()
+                            val transaction = (requireActivity() as MainActivity).supportFragmentManager.beginTransaction()
+                            val collectionFragment = CollectionFragment()
+                            transaction.replace(R.id.AppLayout, collectionFragment)
+                            transaction.addToBackStack(null)
+                            transaction.commit()
+                            Log.d("LogInFragment","[LoginFragment] log in successfully")
                         }else{
-                            Log.d("LogInFragment","log in failed")
+                            Toast.makeText(requireActivity(),"[LoginFragment] Login failed", Toast.LENGTH_SHORT).show()
+                            Log.d("LogInFragment","[LoginFragment] log in failed")
                         }
                     }
 
                     override fun onFailure(call: Call<LogInModel>, t: Throwable) {
+                        Toast.makeText(requireActivity(),"[LoginFragment] Login failed", Toast.LENGTH_SHORT).show()
                         Log.d("LogInFragment","log in failed")
                         t.printStackTrace()
                     }
@@ -86,12 +92,7 @@ class LogInFragment : Fragment() {
                 })
             }
 
-            //点击切换到收藏页面CollectionFragment
-            val transaction = (requireActivity() as MainActivity).supportFragmentManager.beginTransaction()
-            val collectionFragment = CollectionFragment()
-            transaction.replace(R.id.AppLayout, collectionFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
+
 
         }
 

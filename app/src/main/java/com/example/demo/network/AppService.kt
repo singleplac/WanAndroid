@@ -59,12 +59,19 @@ interface AppService {
     ): retrofit2.Call<LogInModel>
 
     /**
+     * 退出登陆
+     */
+    @GET("user/logout/json")
+    fun logout(): retrofit2.Call<DataModel>
+
+
+    /**
      * 获取收藏文章列表
      * @param page
      * @return
      */
     @GET("/lg/collect/list/{page}/json")
-    fun getCollectList(@Path("page") page: Int): retrofit2.Call<DataModel>
+    fun getCollectList(@Path("page") page: Int): retrofit2.Call<CollectModel>
 
     /**
      * 收藏文章
