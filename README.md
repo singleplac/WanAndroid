@@ -16,7 +16,7 @@
 4. 个人页面
 - 实现UI
 5. 登录
-- 使用OKHTTP读取和返回cookies，使用SharedPreferences存储登录响应中返回的包含用户名和密码的cookies（有待完善）
+-自动登录 使用OKHTTP读取和返回cookies，使用SharedPreferences存储登录响应中返回的包含用户名和密码的cookies
 
 
 #### 其它
