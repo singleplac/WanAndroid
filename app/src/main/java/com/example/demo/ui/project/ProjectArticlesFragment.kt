@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.demo.MainActivity
 import com.example.demo.R
 import com.example.demo.ui.adpater.ItemAdapter
 import com.example.demo.relateddata.model.DataModel
@@ -53,11 +56,22 @@ class ProjectArticlesFragment : Fragment() {
         //给recyclerView添加adapter
         adapter = ItemAdapter(articleList, requireContext(),object:ItemAdapter.AdapterItemClickListener{
             override fun onPositionClicked(v: View?, position: Int) {
-                TODO("Not yet implemented")
+                //借助activity传递网页
+                val title: TextView = v!!.findViewById(R.id.title)
+                val communicator = requireContext() as MainActivity
+                //点击标题跳转到另一个fragment
+                title.setOnClickListener {
+                    Toast.makeText(requireContext(), "${title.text} is clicked", Toast.LENGTH_SHORT)
+                        .show()
+
+                    val item = articleList[position]
+                    //调用接口传参
+                    communicator.passDataCom(item.link)
+                }
             }
 
             override fun onLongClicked(v: View?, position: Int) {
-                TODO("Not yet implemented")
+                return
             }
 
         })
