@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.project.ProjectArticlesFragment">
+    tools:context=".ui.project.ProjectArticlesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id = "@+id/projectArticle_rv"

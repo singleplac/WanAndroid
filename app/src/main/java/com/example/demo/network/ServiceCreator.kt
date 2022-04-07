@@ -24,41 +24,59 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import android.content.SharedPreferences
 import com.blankj.utilcode.util.LogUtils
+import com.example.demo.utils.LogUtil
 import kotlin.coroutines.coroutineContext
 
 
 object ServiceCreator {
+
     private const val TAG = "OkHttp"
     private const val BASE_URL = "https://www.wanandroid.com"
     private lateinit var retrofitWithCookies: Retrofit
 
+    /**
+     * 不添加cookie的网络请求
+     */
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-
-    fun <T> create(serviceClass: Class<T>): T = retrofit.create(serviceClass)
-
-    fun <T> createWithCookies(serviceClass: Class<T>): T {
-        retrofitWithCookies = setCookies(true)
-        return retrofitWithCookies.create(serviceClass)
+    fun checkWithoutLog():AppService{
+        return retrofit.create(AppService::class.java)
     }
 
-    inline fun <reified T> create(): T = create(T::class.java)
+    /**
+     * 使用拦截器拦截和储存cookies
+     * @return AppService
+     */
+    fun getInstance(): AppService{
 
-    private fun setCookies(isSaveCookies: Boolean): Retrofit {
         val builder = OkHttpClient.Builder()
-        builder.addInterceptor(ReceivedCookiesInterceptor( ))
-        builder.addInterceptor(AddCookiesInterceptor())
-        return Retrofit.Builder()
+            .addInterceptor(ReceivedCookiesInterceptor( ))
+            .addInterceptor(AddCookiesInterceptor())
+        val retrofit =Retrofit.Builder()
             .client(builder.build())
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
+        return retrofit.create(AppService::class.java)
     }
 
+    /**其他写法
+    fun <T> createWithCookies(serviceClass: Class<T>): T {
+        retrofitWithCookies = setCookies(true)
+        return retrofitWithCookies.create(serviceClass)
+    }
 
+    fun <T> create(serviceClass: Class<T>): T = retrofit.create(serviceClass)
+    inline fun <reified T> create(): T = create(T::class.java)
+    */
+
+
+    /**
+     * 从Set-Cookie中获取到cookie，并用SharedPreferences存到本地
+     */
     class ReceivedCookiesInterceptor: Interceptor {
         override fun intercept(chain: Chain): Response {
             //The intercepted cookie is saved in the originalResponse
@@ -78,12 +96,16 @@ object ServiceCreator {
                 }
                 SPUtils.getInstance("cookie").put("cookie", cookies)
 
+            }else{
+                LogUtil.instance.addTrace(TAG, "didn't find Set-Cookie, related information saved failed ")
             }
             return originalResponse
         }
     }
 
-    //添加cookies
+    /**
+     * 添加cookies
+     */
     class AddCookiesInterceptor : Interceptor {
         override fun intercept(chain: Chain): Response {
             val builder = chain.request().newBuilder()

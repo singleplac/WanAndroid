@@ -21,6 +21,9 @@
     <string name="login_sign_in_short">sign in</string>
     <string name="login_button_register">Register</string>
     <string name="login_button_login">Login</string>
+    <string name="login_successful_cn">登入成功</string>
+    <string name="pls_input_right_username_password_cn">请输入正确的用户名与密码</string>
+    <string name="pls_check_password">请检查密码是否对应</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

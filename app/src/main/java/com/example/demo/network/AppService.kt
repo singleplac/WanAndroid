@@ -1,6 +1,7 @@
 package com.example.demo.network
 
-import com.example.demo.model.*
+import com.example.demo.relateddata.model.*
+import com.example.demo.relateddata.repository.base.BaseResponse
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -84,14 +85,10 @@ interface AppService {
     /**
      * 取消收藏文章
      * @param id
-     * @param originId
      * @return
      */
-    @POST("/lg/uncollect/{id}/json")
-    fun cancelCollectArticle(
-        @Path("id") id: Int,
-        @Query("originId") originId: Int
-    ): retrofit2.Call<DataModel>
+    @POST("/lg/uncollect_originId/{id}/json")
+    fun cancelCollectArticle(@Path("id") id: Int, ): retrofit2.Call<DataModel>
 
 
     /**
@@ -106,11 +103,14 @@ interface AppService {
      * @return
      */
     @GET("/project/list/{page}/json")
-    fun getProjectList(
-        @Path("page") page: Int,
-        @Query("cid") cid: Int
-    ): retrofit2.Call<DataModel>
+    fun getProjectList(@Path("page") page: Int, @Query("cid") cid: Int): retrofit2.Call<DataModel>
 
+//    /**
+//     * 获取banner数据
+//     * @return
+//     */
+//    @GET("/banner/json")
+//    fun getBannerData() : retrofit2.Call<BannerDataModel>
     /**
      * 获取banner数据
      * @return
