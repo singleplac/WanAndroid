@@ -14,20 +14,37 @@ import java.util.HashSet
  * Time: 13:46
  */
 object LoginUtil {
+
+    private const val SETTINGS_SP_KEY: String = "SETTINGS_SP"
+    private const val IS_LOGIN_KEY = "IS_LOGIN"
+    private const val USERNAME_KEY = "USERNAME"
+    private const val AVATAR_URI_STRING_KEY = "AVATAR_URI_STRING"
+
+    fun setIsLogin(isLogin: Boolean) {
+//        getSp().edit().putBoolean(IS_LOGIN_KEY, isLogin).apply()
+        SPUtils.getInstance(IS_LOGIN_KEY).put(IS_LOGIN_KEY, isLogin)
+    }
+
+    fun setUsername(username: String) {
+//        getSp().edit().putString(USERNAME_KEY, username).apply()
+        SPUtils.getInstance(USERNAME_KEY).put(USERNAME_KEY, username)
+    }
+
+
     /**
      * 获取当前登录用户信息
      *
      * @return
      */
     fun getLoginUser(): String {
-        return SPUtils.getInstance("cookie").getString("userName", "")
+        return SPUtils.getInstance(USERNAME_KEY).getString(USERNAME_KEY, "")
     }
 
     /**
      * 清空登录信息
      */
     fun clearLoginInfo() {
-        SPUtils.getInstance("cookie").put("userName", "")
+        SPUtils.getInstance(USERNAME_KEY).put(USERNAME_KEY, "")
     }
 
     /**
@@ -36,6 +53,6 @@ object LoginUtil {
      * @return
      */
     fun isLogin(): Boolean {
-        return !TextUtils.isEmpty(getLoginUser())
+        return SPUtils.getInstance(IS_LOGIN_KEY).getBoolean(IS_LOGIN_KEY)
     }
 }

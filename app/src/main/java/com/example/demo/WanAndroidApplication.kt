@@ -14,14 +14,12 @@ class WanAndroidApplication : Application() {
     companion object {
         @SuppressWarnings("StaticFieldLeak") //添加注解，忽视掉"内存泄漏"警告
         lateinit var context: Context
-        lateinit var appService: AppService
 
     }
 
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
-        appService = ServiceCreator.createWithCookies(AppService::class.java)
     }
 
 

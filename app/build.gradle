@@ -56,7 +56,10 @@ dependencies {
     //for save cookies
     implementation 'com.blankj:utilcodex:1.26.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.6.0'
+//    implementation 'com.squareup.okhttp3:okhttp:3.6.0'
+//    版本低会报错 Expected Android API level 21+ but was 30
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.4.0'
 
     //rx
     implementation 'io.reactivex.rxjava2:rxjava:2.2.7'
