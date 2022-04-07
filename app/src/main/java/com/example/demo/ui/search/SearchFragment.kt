@@ -145,9 +145,7 @@ class SearchFragment : Fragment() {
                         for (data in hotKeyList){
                             tabNames.add(data.name)
                         }
-//                        hotKeyList.forEach {
-//                            DataHotKey -> tabNames.add(DataHotKey.name)
-//                        }
+
                         flowLayout.adapter = object : TagAdapter<String>(tabNames) {
                             override fun getView(
                                 parent: FlowLayout?,
