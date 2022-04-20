@@ -17,7 +17,7 @@
 - 获取项目目录 ViewPage + TabLayout
 - 返回相应目录下的文章
 4. 个人页面
-- 实现UI
+- 个人收藏
 5. 登录
 -自动登录 使用PersistCookieJar
 
