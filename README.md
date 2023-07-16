@@ -2,8 +2,9 @@
 这是基于kotlin和WanAndroid开放API的APP。
 
 #### 功能截图
-![截图1](https://gitee.com/zhao-fangchen/image/raw/master/WanAndroid/%E5%8A%9F%E8%83%BD%E6%88%AA%E5%9B%BE1.jpg)
-![截图2](https://gitee.com/zhao-fangchen/image/raw/master/WanAndroid/%E5%8A%9F%E8%83%BD%E6%88%AA%E5%9B%BE2.jpg)
+<img width="626" alt="image" src="https://github.com/singleplac/WanAndroid/assets/61055463/56af6bf7-076e-43d3-87d1-7032b2911a4b">
+<img width="626" alt="image" src="https://github.com/singleplac/WanAndroid/assets/61055463/43be7bef-1922-41b4-b691-875348d14def">
+
 #### 目前实现功能
 1. 首页页面 MVVM 
 - 首页banner： ViewPager2 + RecyclerView.Adapter
